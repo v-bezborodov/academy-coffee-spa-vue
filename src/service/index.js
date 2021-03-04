@@ -12,7 +12,7 @@ import axios from 'axios';
 // };
 
 export default axios.create({
-    baseURL: `your API end point`,
+    baseURL: `https://coffee.slawek.dev/`,
     headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'

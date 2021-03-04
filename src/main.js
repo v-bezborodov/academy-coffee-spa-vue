@@ -2,17 +2,18 @@ import {createApp} from 'vue'
 import {createRouter, createWebHistory} from 'vue-router'
 import App from './App.vue'
 import {routes} from './routes.js'
-import api from './service/index'
+import axios from './service/index'
+import api from './service/api/index'
 
 const app = createApp(App)
 
-app.config.globalProperties.$axios = api;
+app.provide('api', api);
 
 let router = createRouter({
     history: createWebHistory(),
     routes: routes,
 })
-app.use(router)
+app.use(router,axios)
 
 app.mount('#app')
 

@@ -6,7 +6,7 @@
         method="post"
     >
       <div>
-        <label for="name">Email</label>
+        <label for="name">Name</label>
         <input type="text" id="name" v-model="name">
       </div>
       <div>
@@ -34,7 +34,7 @@
       <p v-if="errors.length">
         <b>Please correct the following error(s):</b>
       <ul>
-        <li v-for="error in errors" v-bind:key="error">{{ error }}</li>
+        <li v-for="error in errors" v-bind:key="error">{{ JSON.stringify(error) }}</li>
       </ul>
       </p>
     </div>
@@ -43,20 +43,44 @@
 </template>
 
 <script>
+import axios from "axios";
+
+import {ref} from 'vue'
+
 export default {
   name: "RegisterComponent",
-  data() {
-    return {
-      name: '',
-      email: '',
-      password: '',
-      password_confirmation: '',
-      errors: [],
-    }
-  },
-  methods: {
-    checkForm: function (e) {
+  setup() {
+
+    const name = ref('')
+    const email = ref('')
+    const password = ref('')
+    const password_confirmation = ref('')
+    const errors = ref([])
+
+    const checkForm = (e) => {
       if (e) e.preventDefault()
+
+      let options = {
+        name: name.value,
+        email: email.value,
+        password: password.value,
+        password_confirmation: password_confirmation.value
+
+      }
+      axios.post('https://coffee.slawek.dev/api/register', options).then((res) => {
+            alert(JSON.stringify(res))
+          }
+      ).catch((error) => {
+        errors.value.push(error.response.data.error)
+      })
+    }
+    return {
+      checkForm,
+      name,
+      email,
+      password,
+      password_confirmation,
+      errors
     }
   }
 }
