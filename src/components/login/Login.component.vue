@@ -53,7 +53,7 @@ export default {
         password: password.value,
 
       }
-      axios.post('https://coffee.slawek.dev/api/login', options).then((res) => {
+      axios.post('https://coffee.slawek.dev/api/auth/login', options).then((res) => {
             res.data && alert(JSON.stringify(res.data))
           }
       ).catch((error) => {

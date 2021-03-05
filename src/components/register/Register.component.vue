@@ -67,7 +67,7 @@ export default {
         password_confirmation: password_confirmation.value
 
       }
-      axios.post('https://coffee.slawek.dev/api/register', options).then((res) => {
+      axios.post('https://coffee.slawek.dev/api/auth/register', options).then((res) => {
             res.data && alert(JSON.stringify(res.data))
           }
       ).catch((error) => {
