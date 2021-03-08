@@ -55,9 +55,10 @@ export default {
       }
       axios.post('https://coffee.slawek.dev/api/auth/login', options).then((res) => {
             res.data && alert(JSON.stringify(res.data))
+            localStorage.setItem('access_token', res.data.access_token)
           }
       ).catch((error) => {
-        errors.value.push(error.response.data.error)
+        error?.response?.data && errors.value.push(error.response.data.error)
       })
     }
     return {

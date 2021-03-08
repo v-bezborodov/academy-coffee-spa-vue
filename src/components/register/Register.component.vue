@@ -68,7 +68,7 @@ export default {
 
       }
       axios.post('https://coffee.slawek.dev/api/auth/register', options).then((res) => {
-            res.data && alert(JSON.stringify(res.data))
+            res.data && alert(res.data.message)
           }
       ).catch((error) => {
         errors.value.push(error.response.data.error)
