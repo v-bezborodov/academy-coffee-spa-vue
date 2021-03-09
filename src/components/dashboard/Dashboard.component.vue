@@ -2,6 +2,26 @@
   <div>
     <div>
       <table>
+        <thead>
+        <tr>
+          <th>
+            Name
+          </th>
+          <th>
+            Email
+          </th>
+          <th>
+            Role
+          </th>
+          <th>
+            Password
+          </th>
+          <th>
+            Action
+          </th>
+        </tr>
+        </thead>
+        <tbody>
         <tr v-for="user in users" :key="user.id">
           <td>
             {{ user.name }}
@@ -9,7 +29,18 @@
           <td>
             {{ user.email }}
           </td>
+          <td>
+            {{ user.roles.length ? user.roles.map(role => role.name) :'user'}}
+          </td>
+          <td>
+            {{ user.one_time_password ?? 'n/a' }}
+          </td>
+          <td>
+            <button>Edit</button>
+            <button @click="generatePassword(user.id)">Generate password</button>
+          </td>
         </tr>
+        </tbody>
       </table>
     </div>
   </div>
@@ -36,18 +67,33 @@ export default {
       })
     }
 
+    const generatePassword = (id) => {
+      if (!id) return
+
+      let options = {
+        id: id,
+      }
+      axios.post(`${process.env.VUE_APP_API_URL}/api/password/generate`, options).then(() => {
+            getAllUsers()
+          }
+      ).catch((error) => {
+        error?.response?.data && errors.value.push(error.response.data.error)
+      })
+    }
+
     getAllUsers()
 
     return {
       errors,
-      users
+      users,
+      generatePassword
     }
   }
 }
 </script>
 
 <style scoped>
-table{
+table {
   margin: 0 auto;
 }
 

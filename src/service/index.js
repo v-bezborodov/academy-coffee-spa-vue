@@ -49,14 +49,15 @@ axios.interceptors.response.use(
             //         break;
             //
                 case 401:
-                    alert("session expired");
+                    alert("Unauthorized");
                     break;
-            //     case 403:
-            //         router.replace({
-            //             path: "/login",
-            //             query: { redirect: router.currentRoute.fullPath }
-            //         });
-            //         break;
+                case 403:
+                    alert("Not granted!");
+                    // router.replace({
+                    //     path: "/login",
+                    //     query: { redirect: router.currentRoute.fullPath }
+                    // });
+                    break;
             //     case 404:
             //         alert('page not exist');
             //         break;

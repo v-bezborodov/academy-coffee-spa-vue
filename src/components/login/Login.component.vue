@@ -36,7 +36,7 @@
 <script>
 import {ref} from "vue";
 import axios from "axios";
-import { useRouter } from 'vue-router'
+import {useRouter} from 'vue-router'
 
 export default {
   name: "LoginComponent",
@@ -56,6 +56,7 @@ export default {
 
       axios.post(`${process.env.VUE_APP_API_URL}/api/auth/login`, options).then((res) => {
             res.data && alert(JSON.stringify(res.data))
+            localStorage.removeItem("access_token");
             localStorage.setItem('access_token', res.data.access_token)
             return router.push('/dashboard')
           }
