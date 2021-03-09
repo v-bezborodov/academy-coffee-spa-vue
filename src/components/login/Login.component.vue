@@ -36,14 +36,15 @@
 <script>
 import {ref} from "vue";
 import axios from "axios";
+import { useRouter } from 'vue-router'
 
 export default {
   name: "LoginComponent",
   setup() {
-
     const email = ref('')
     const password = ref('')
     const errors = ref([])
+    const router = useRouter()
 
     const checkForm = (e) => {
       if (e) e.preventDefault()
@@ -51,11 +52,12 @@ export default {
       let options = {
         email: email.value,
         password: password.value,
-
       }
+
       axios.post(`${process.env.VUE_APP_API_URL}/api/auth/login`, options).then((res) => {
             res.data && alert(JSON.stringify(res.data))
             localStorage.setItem('access_token', res.data.access_token)
+            return router.push('/dashboard')
           }
       ).catch((error) => {
         error?.response?.data && errors.value.push(error.response.data.error)

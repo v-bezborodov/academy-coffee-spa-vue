@@ -14,7 +14,8 @@ let router = createRouter({
     routes: routes,
     base: '/',
 })
-app.use(router,axios)
+
+app.use(router, axios)
 
 app.mount('#app')
 

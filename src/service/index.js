@@ -22,14 +22,12 @@ export default axios.create({
 axios.interceptors.request.use(
     config => {
         const token = localStorage.getItem("access_token");
-        console.log('token', token)
         if (token) {
-            config.headers.common["Authorization"] = token;
+            config.headers.common["Authorization"] = 'Bearer '+token;
         }
         return config;
     },
     error => {
-        console.log('error occured', error)
         return Promise.reject(error);
     }
 );
@@ -44,15 +42,15 @@ axios.interceptors.response.use(
     },
     error => {
         if (error.response.status) {
-            // switch (error.response.status) {
+            switch (error.response.status) {
             //     case 400:
             //
             //         //do something
             //         break;
             //
-            //     case 401:
-            //         alert("session expired");
-            //         break;
+                case 401:
+                    alert("session expired");
+                    break;
             //     case 403:
             //         router.replace({
             //             path: "/login",
@@ -71,7 +69,7 @@ axios.interceptors.response.use(
             //                 }
             //             });
             //         }, 1000);
-            // }
+            }
             return Promise.reject(error.response);
         }
     }
