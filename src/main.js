@@ -12,6 +12,7 @@ app.provide('api', api);
 let router = createRouter({
     history: createWebHistory(),
     routes: routes,
+    base: '/',
 })
 app.use(router,axios)
 
