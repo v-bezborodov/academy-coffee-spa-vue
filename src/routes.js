@@ -5,4 +5,5 @@ import RegisterComponent from './components/register/Register.component'
 export let routes = [
     { path: '/login', component: LoginComponent },
     { path: '/register', component: RegisterComponent },
+    { path: '/dashboard', component: RegisterComponent },
 ]

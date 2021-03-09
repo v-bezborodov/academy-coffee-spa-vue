@@ -53,7 +53,7 @@ export default {
         password: password.value,
 
       }
-      axios.post('https://coffee.slawek.dev/api/auth/login', options).then((res) => {
+      axios.post(`${process.env.VUE_APP_API_URL}/api/auth/login`, options).then((res) => {
             res.data && alert(JSON.stringify(res.data))
             localStorage.setItem('access_token', res.data.access_token)
           }
