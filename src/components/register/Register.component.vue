@@ -14,6 +14,10 @@
         <input type="text" id="email" v-model="email">
       </div>
       <div>
+        <label for="email">Phone</label>
+        <input type="text" id="phone" v-model="phone">
+      </div>
+      <div>
         <label for="password">Password</label>
         <input type="text" id="password" v-model="password">
       </div>
@@ -53,6 +57,7 @@ export default {
 
     const name = ref('')
     const email = ref('')
+    const phone = ref('')
     const password = ref('')
     const password_confirmation = ref('')
     const errors = ref([])
@@ -63,6 +68,7 @@ export default {
       let options = {
         name: name.value,
         email: email.value,
+        phone: phone.value,
         password: password.value,
         password_confirmation: password_confirmation.value
       }
@@ -78,6 +84,7 @@ export default {
       checkForm,
       name,
       email,
+      phone,
       password,
       password_confirmation,
       errors

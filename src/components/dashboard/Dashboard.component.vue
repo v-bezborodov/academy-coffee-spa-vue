@@ -11,6 +11,9 @@
             Email
           </th>
           <th>
+            Phone
+          </th>
+          <th>
             Role
           </th>
           <th>
@@ -28,6 +31,9 @@
           </td>
           <td>
             {{ user.email }}
+          </td>
+          <td>
+            {{ user.phone }}
           </td>
           <td>
             {{ user.roles.length ? user.roles.map(role => role.name) :'user'}}
