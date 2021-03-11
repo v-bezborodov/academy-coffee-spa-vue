@@ -42,8 +42,11 @@
             {{ user.one_time_password ?? 'n/a' }}
           </td>
           <td>
-            <button>Edit</button>
+            <router-link :to="{path: '/user/edit/' + user.id}">
+              <button id="myButton" class="foo bar">Edit</button>
+            </router-link>
             <button @click="generatePassword(user.id)">Generate password</button>
+            <button @click="deleteUser(user.id)">Delete user</button>
           </td>
         </tr>
         </tbody>
@@ -65,7 +68,7 @@ export default {
 
     const getAllUsers = (e) => {
       if (e) e.preventDefault()
-      axios.get(`${process.env.VUE_APP_API_URL}/api/user/all`).then((res) => {
+      axios.get(`${process.env.VUE_APP_API_URL}/api/user`).then((res) => {
             if (res.data) users.value = res.data
           }
       ).catch((error) => {
@@ -87,12 +90,23 @@ export default {
       })
     }
 
+    const deleteUser = (id) => {
+      if (!id) return
+      axios.delete(`${process.env.VUE_APP_API_URL}/api/user/${id}`).then(() => {
+            getAllUsers()
+          }
+      ).catch((error) => {
+        error?.response?.data && errors.value.push(error.response.data.error)
+      })
+    }
+
     getAllUsers()
 
     return {
       errors,
       users,
-      generatePassword
+      generatePassword,
+      deleteUser
     }
   }
 }
