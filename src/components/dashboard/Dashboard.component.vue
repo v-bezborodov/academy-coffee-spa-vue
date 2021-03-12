@@ -39,7 +39,7 @@
             {{ user.roles.length ? user.roles.map(role => role.name) :'user'}}
           </td>
           <td>
-            {{ user.one_time_password ?? 'n/a' }}
+            {{ user.one_time_password ?? '****' }}
           </td>
           <td>
             <router-link :to="{path: '/user/edit/' + user.id}">
