@@ -4,7 +4,7 @@ import App from './App.vue'
 import {routes} from './routes.js'
 import axios from './service/index'
 import api from './service/api/index'
-import store from "./store/index"
+import store from "./store"
 
 const app = createApp(App)
 
@@ -16,7 +16,8 @@ let router = createRouter({
     base: '/',
 })
 
-app.use(router, axios, store)
+app.use(router, axios)
+app.use(store)
 
 app.mount('#app')
 

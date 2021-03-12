@@ -37,6 +37,7 @@
 import {ref} from "vue";
 import axios from "axios";
 import {useRouter} from 'vue-router'
+import { useStore } from 'vuex'
 
 export default {
   name: "LoginComponent",
@@ -45,6 +46,7 @@ export default {
     const password = ref('')
     const errors = ref([])
     const router = useRouter()
+    const store = useStore()
 
     const checkForm = (e) => {
       if (e) e.preventDefault()
@@ -55,14 +57,22 @@ export default {
       }
 
       axios.post(`${process.env.VUE_APP_API_URL}/api/auth/login`, options).then((res) => {
-            res.data && alert(JSON.stringify(res.data))
+            if(res.data){
+              alert(JSON.stringify(res.data))
+              setUser(res.data)
+            }
             localStorage.removeItem("access_token");
             localStorage.setItem('access_token', res.data.access_token)
+
             return router.push('/dashboard')
           }
       ).catch((error) => {
         error?.response?.data && errors.value.push(error.response.data.error)
       })
+    }
+
+    const setUser=(user)=>{
+      if(user.user) store.dispatch('user/setUser', user.user)
     }
     return {
       checkForm,

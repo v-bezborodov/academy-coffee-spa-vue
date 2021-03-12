@@ -14,16 +14,16 @@
         <input type="text" id="email" v-model="email">
       </div>
       <div>
-        <label for="email">Phone</label>
+        <label for="phone">Phone</label>
         <input type="text" id="phone" v-model="phone">
       </div>
       <div>
         <label for="password">Password</label>
-        <input type="text" id="password" v-model="password">
+        <input type="password" id="password" v-model="password">
       </div>
       <div>
         <label for="password_confirmation">Confirm Password</label>
-        <input type="text" id="password_confirmation" v-model="password_confirmation">
+        <input type="password" id="password_confirmation" v-model="password_confirmation">
       </div>
       <div>
         <p>
@@ -34,13 +34,8 @@
         </p>
       </div>
     </form>
-    <div>
-      <p v-if="errors.length">
-        <b>Please correct the following error(s):</b>
-      <ul>
-        <li v-for="error in errors" v-bind:key="error">{{ JSON.stringify(error) }}</li>
-      </ul>
-      </p>
+    <div v-if="errors.length">
+      <error-handler :errors="errors"/>
     </div>
   </div>
 
@@ -50,9 +45,11 @@
 import axios from "axios";
 
 import {ref} from 'vue'
+import ErrorHandler from "@/components/ErrorHandler/Errorhandler.component";
 
 export default {
   name: "RegisterComponent",
+  components: {ErrorHandler},
   setup() {
 
     const name = ref('')
@@ -77,7 +74,7 @@ export default {
             res.data && alert(res.data.message)
           }
       ).catch((error) => {
-        errors.value.push(error.response.data.error)
+        errors.value.push(error.data.message)
       })
     }
     return {

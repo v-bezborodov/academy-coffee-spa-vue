@@ -1,9 +1,10 @@
 import { createStore } from "vuex"
+import user from './modules/user'
 
 const store = createStore({
-    state:{
-        name: "Vue"
-    }
+    modules: {
+        user
+    },
 })
 
 export default store
