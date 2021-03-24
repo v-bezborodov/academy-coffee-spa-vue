@@ -29,7 +29,7 @@
 import axios from "axios";
 
 import {ref} from 'vue'
-import ErrorHandler from '../../ErrorHandler/Errorhandler.component'
+import ErrorHandler from '../../components/ErrorHandler/Errorhandler.component'
 
 export default {
   name: "RegisterCustomerComponent",

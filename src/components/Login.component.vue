@@ -40,7 +40,7 @@ import {useRouter} from 'vue-router'
 import { useStore } from 'vuex'
 
 export default {
-  name: "LoginComponent",
+  name: "LoginPageComponent",
   setup() {
     const email = ref('')
     const password = ref('')
