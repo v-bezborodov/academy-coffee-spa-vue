@@ -36,13 +36,13 @@
             {{ user.phone }}
           </td>
           <td>
-            {{ user.roles.length ? user.roles.map(role => role.name) :'user'}}
+            {{ user.roles.length ? user.roles.map(role => role.name) : 'user' }}
           </td>
           <td>
             {{ user.one_time_password ?? '****' }}
           </td>
           <td>
-            <router-link :to="{path: '/user/edit/' + user.id}">
+            <router-link :to="{name: 'edit-user', params:{user:user.id} }">
               <button id="myButton" class="foo bar">Edit</button>
             </router-link>
             <button @click="generatePassword(user.id)">Generate password</button>

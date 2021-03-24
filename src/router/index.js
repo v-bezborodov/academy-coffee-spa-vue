@@ -1,8 +1,22 @@
 import {createRouter, createWebHistory} from "vue-router";
-import {routes} from "@/router/routes";
+import routes from "./routes.js";
 
-export let router = createRouter({
-    history: createWebHistory(),
-    routes: routes,
+const routerHistory = createWebHistory()
+
+let router = createRouter({
+    history: routerHistory,
+    routes,
     base: '/',
 })
+
+router.beforeEach((to, from, next) => {
+    console.log(to, from)
+    if (!localStorage.getItem("access_token") && to.name !== 'login') {
+        next({name: 'login'})
+        alert("Login first!")
+    } else {
+        next()
+    }
+})
+
+export default router

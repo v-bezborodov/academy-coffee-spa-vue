@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import RegisterCustomerComponent from '@/components/Register.component'
+import RegisterCustomerComponent from '@/components/RegisterCustomer.component'
 
 export default {
   name: "RegisterCustomerPageComponent",

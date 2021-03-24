@@ -11,7 +11,7 @@
       </div>
       <div>
         <label for="password">Password</label>
-        <input type="text" id="password" v-model="password">
+        <input type="password" id="password" v-model="password">
       </div>
       <div>
         <p>
@@ -23,12 +23,7 @@
       </div>
     </form>
     <div>
-      <p v-if="errors.length">
-        <b>Please correct the following error(s):</b>
-      <ul>
-        <li v-for="error in errors" v-bind:key="error">{{ JSON.stringify(error) }}</li>
-      </ul>
-      </p>
+      <error-handler :errors="errors"/>
     </div>
   </div>
 </template>
@@ -38,9 +33,11 @@ import {ref} from "vue";
 import axios from "axios";
 import {useRouter} from 'vue-router'
 import { useStore } from 'vuex'
+import ErrorHandler from "@/components/ErrorHandler/Errorhandler.component";
 
 export default {
   name: "LoginPageComponent",
+  components: {ErrorHandler},
   setup() {
     const email = ref('')
     const password = ref('')
@@ -67,7 +64,7 @@ export default {
             return router.push('/dashboard')
           }
       ).catch((error) => {
-        error?.response?.data && errors.value.push(error.response.data.error)
+        error.data.message && errors.value.push(error.data.message)
       })
     }
 
