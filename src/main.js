@@ -1,7 +1,6 @@
 import {createApp} from 'vue'
-import {createRouter, createWebHistory} from 'vue-router'
 import App from './App.vue'
-import {routes} from './routes.js'
+import {router} from './router'
 import axios from './service/index'
 import api from './service/api/index'
 import store from "./store"
@@ -9,13 +8,6 @@ import store from "./store"
 const app = createApp(App)
 
 app.provide('api', api);
-
-let router = createRouter({
-    history: createWebHistory(),
-    routes: routes,
-    base: '/',
-})
-
 app.use(router, axios)
 app.use(store)
 
