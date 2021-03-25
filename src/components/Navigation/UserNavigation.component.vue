@@ -14,7 +14,7 @@ import { useStore } from 'vuex'
 import { computed } from 'vue'
 
 export default {
-name: "Header.component",
+name: "UserNavigation.component",
   setup() {
     const store = useStore()
     const user = computed(() => store.getters['user/getUser'])

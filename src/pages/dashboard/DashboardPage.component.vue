@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import DashboardComponent from '@/components/Dashboard.component'
+import DashboardComponent from '@/components/Dashboard/Dashboard.component'
 
 export default {
   name: "DashboardPage.component",

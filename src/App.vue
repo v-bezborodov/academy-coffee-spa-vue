@@ -1,23 +1,18 @@
 <template>
   <div>
-    <header-component/>
-    <p>
-            <router-link to="/">Home</router-link>&nbsp;
-            <router-link to="/login">Login</router-link>&nbsp;
-            <router-link to="/register">Register</router-link>&nbsp;
-            <router-link to="/dashboard">Dashboard</router-link>&nbsp;
-            <router-link to="/register-customer">Register new customer</router-link>&nbsp;
-    </p>
+    <user-navigation-component/>
+    <top-navigation-component/>
     <router-view></router-view>
   </div>
 </template>
 
 <script>
-import HeaderComponent from './components/topNav/Header.component'
+import UserNavigationComponent from '@/components/Navigation/UserNavigation.component'
+import TopNavigationComponent from '@/components/Navigation/TopNavigation.component'
 
 export default {
   name: 'App',
-  components: {HeaderComponent},
+  components: {UserNavigationComponent, TopNavigationComponent},
 }
 </script>
 

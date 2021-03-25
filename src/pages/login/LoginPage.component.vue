@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import LoginComponent from '@/components/Login.component'
+import LoginComponent from '@/components/User/Login.component'
 
 export default {
   name: "LoginPageComponent",
