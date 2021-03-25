@@ -42,7 +42,7 @@
             {{ user.one_time_password ?? '****' }}
           </td>
           <td>
-            <router-link :to="{name: 'edit-user', params:{user:user.id} }">
+            <router-link :to="{name: 'Edit-user', params:{user:user.id} }">
               <button id="myButton" class="foo bar">Edit</button>
             </router-link>
             <button @click="generatePassword(user.id)">Generate password</button>

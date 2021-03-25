@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import DashboardUserComponent from '@/components/Dashboard/User/DashboardUser.component'
+import DashboardUserComponent from '@/components/Dashboard/User/User.component'
 
 export default {
   name: "DashboardPage.component",

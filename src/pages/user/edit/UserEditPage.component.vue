@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import UserEditComponent from '@/components/User/UserEdit.component'
+import UserEditComponent from '@/components/Dashboard/User/edit/UserEdit.component'
 
 export default {
   name: "UserEditPage.component",
