@@ -1,12 +1,12 @@
 <template>
-<div>
-
-</div>
+  <div>
+    Category page
+  </div>
 </template>
 
 <script>
 export default {
-name: "Category.component"
+  name: "Category.component"
 }
 </script>
 

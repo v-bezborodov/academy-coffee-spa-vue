@@ -5,12 +5,10 @@ const routerHistory = createWebHistory()
 
 let router = createRouter({
     history: routerHistory,
-    routes,
-    base: '/',
+    routes: routes,
 })
 
 router.beforeEach((to, from, next) => {
-    console.log(to, from)
     if (!localStorage.getItem("access_token") && to.name !== 'login' && to.name !== 'register') {
         next({name: 'login'})
         alert("Login first!")

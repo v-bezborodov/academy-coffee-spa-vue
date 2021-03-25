@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import CategoryComponent from '@/components/Category/Category.component'
+import CategoryComponent from '@/components/Dashboard/Category/Category.component'
 
 export default {
   name: "CategoryPage.component",

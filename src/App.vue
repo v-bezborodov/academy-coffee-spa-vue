@@ -2,7 +2,7 @@
   <div>
     <user-navigation-component/>
     <top-navigation-component/>
-    <router-view></router-view>
+<!--    <router-view></router-view>-->
   </div>
 </template>
 

@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import PostComponent from '@/components/Post/Post.component'
+import PostComponent from '@/components/Dashboard/Post/Post.component'
 
 export default {
   name: "PostPage.component",

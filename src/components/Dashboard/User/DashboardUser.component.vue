@@ -61,7 +61,7 @@ import {ref} from "vue";
 import axios from "axios";
 
 export default {
-  name: "Dashboard.component",
+  name: "DashboardUser.component",
   setup() {
     const users = ref([])
     const errors = ref([])
