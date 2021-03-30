@@ -9,9 +9,9 @@ let router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
-    if (!localStorage.getItem("access_token") && to.name !== 'login' && to.name !== 'register') {
-        next({name: 'login'})
+    if (!localStorage.getItem("access_token") && to.name !== 'Login' && to.name !== 'Register') {
         alert("Login first!")
+        next({name: 'Login'})
     } else {
         next()
     }

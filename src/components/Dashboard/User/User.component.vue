@@ -57,7 +57,7 @@
 </template>
 
 <script>
-import {ref} from "vue";
+import {ref, onMounted} from "vue";
 import axios from "axios";
 
 export default {
@@ -100,7 +100,8 @@ export default {
       })
     }
 
-    getAllUsers()
+
+    onMounted(getAllUsers)
 
     return {
       errors,

@@ -10,7 +10,7 @@ import PostEditPageComponent from '../pages/post/edit/PostEditPage.component'
 import UserPageComponent from '../pages/user/UserPage.component'
 
 let routes = [
-    {path: '', name: 'Home', component: HomePageComponent},
+    {path: '/', name: 'Home', component: HomePageComponent},
     {path: '/login', name: 'Login', component: LoginPageComponent},
     {path: '/register', name: 'Register', component: RegisterPageComponent},
     {path: '/dashboard', name: 'Dashboard', component: DashboardPageComponent},

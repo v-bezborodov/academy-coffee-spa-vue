@@ -23,8 +23,8 @@ export default {
 </script>
 
 <style scoped>
-li{
-  color:red;
+li {
+  color: red;
 }
 
 </style>
