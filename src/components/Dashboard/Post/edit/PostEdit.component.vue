@@ -3,14 +3,14 @@
     Edit post id :{{ $route.params.post }}
     <form @submit.prevent="onSubmit">
 
-      <input-text name="title" label="Title" v-model:error="titleError" v-model:value="title"/>
-      <input-textarea name="body" label="Body" v-model:error="bodyError" v-model:value="body"/>
+      <input-text name="title" v-model="title" label="Title" v-model:value="title" v-model:error="errors.title"/>
+      <input-textarea name="body" label="Body" v-model:value="body" v-model:error="errors.body"/>
       <div>
-        <input-text name="img" label="Image" v-model:error="imgError" v-model:value="img"/>
+        <input-text name="img" label="Image" v-model:value="img" v-model:error="errors.img"/>
       </div>
 
-      <input-text name="time_read" label="Time Read" v-model:error="timeReadError" v-model:value="timeRead"/>
-      <input-text name="is_published" label="Published" v-model:error="isPublishedError" v-model:value="isPublished"/>
+      <input-text name="time_read" label="Time Read"  v-model:value="timeRead" v-model:error="errors.timeRead"/>
+      <input-text name="is_published" label="Published"  v-model:value="isPublished" v-model:error="errors.isPublished"/>
       <!--      <InputName v-model="postTitle"/>-->
       <button type="submit">Submit</button>
     </form>
@@ -23,7 +23,7 @@ import {useForm, useField} from "vee-validate";
 import * as yup from "yup";
 import InputText from "@/components/partial/form/input/InputText";
 import axios from "axios";
-import {onMounted, ref} from "vue";
+import {onMounted} from "vue";
 import {useRoute} from 'vue-router'
 import InputTextarea from "@/components/partial/form/input/InputTextarea";
 
@@ -33,23 +33,30 @@ export default {
   setup() {
     const route = useRoute()
 
-    const errors = ref([])
+    // const errors = ref([])
 
 
-    const {value: body, errorMessage: bodyError} = useField('body');
-    const {value: title, errorMessage: titleError} = useField('title');
-    const {value: img, errorMessage: imgError} = useField('img');
-    const {value: timeRead, errorMessage: timeReadError} = useField('time_read');
-    const {value: isPublished, errorMessage: isPublishedError} = useField('is_published');
 
     const simpleSchema = yup.object({
       body: yup.string().required().max(256),
-      title: yup.string().required().max(256),
+      title: yup.string().required().min(3),
       img: yup.string().required().max(256),
       postTitle: yup.string().required().min(3, 'Не больше 3 символов.'),
       timeRead: yup.number().required(),
       isPublished: yup.number().required(),
     });
+
+    const { errors } = useForm({
+      validationSchema: simpleSchema,
+    });
+
+    const {value: body} = useField('body');
+    const {value: title} = useField('title');
+    const {value: img} = useField('img');
+    const {value: timeRead} = useField('time_read');
+    const {value: isPublished} = useField('is_published');
+
+
 
     function onSubmit() {
 
@@ -68,14 +75,10 @@ export default {
             }
           }
       ).catch((error) => {
-        error?.response?.data && errors.value.push(error.response.data.error)
+        console.log('error?.response', error.response)
+        // error?.response?.data && errors.value.push(error.response.data.error)
       })
     }
-
-    useForm({
-      validationSchema: simpleSchema,
-    });
-
 
 
     onMounted(() => onLoadPost(route.params.post))
@@ -86,11 +89,7 @@ export default {
       img,
       timeRead,
       isPublished,
-      titleError,
-      bodyError,
-      timeReadError,
-      isPublishedError,
-      imgError,
+      errors,
       onSubmit,
     }
   }
