@@ -1,11 +1,16 @@
 <template>
   <div>
     Edit post id :{{ $route.params.post }}
-
     <form @submit.prevent="onSubmit">
-      <input-text name="email" label="Email" v-model:error="emailError" v-model:value="email"/>
-      <input-text name="title" label="Title" v-model:error="emailError" v-model:value="post.title"/>
-      <input-textarea name="body" label="Body" v-model:error="bodyError" v-model:value="post.body"/>
+
+      <input-text name="title" label="Title" v-model:error="titleError" v-model:value="title"/>
+      <input-textarea name="body" label="Body" v-model:error="bodyError" v-model:value="body"/>
+      <div>
+        <input-text name="img" label="Image" v-model:error="imgError" v-model:value="img"/>
+      </div>
+
+      <input-text name="time_read" label="Time Read" v-model:error="timeReadError" v-model:value="timeRead"/>
+      <input-text name="is_published" label="Published" v-model:error="isPublishedError" v-model:value="isPublished"/>
       <!--      <InputName v-model="postTitle"/>-->
       <button type="submit">Submit</button>
     </form>
@@ -28,13 +33,22 @@ export default {
   setup() {
     const route = useRoute()
 
-    const post = ref({})
     const errors = ref([])
 
+
+    const {value: body, errorMessage: bodyError} = useField('body');
+    const {value: title, errorMessage: titleError} = useField('title');
+    const {value: img, errorMessage: imgError} = useField('img');
+    const {value: timeRead, errorMessage: timeReadError} = useField('time_read');
+    const {value: isPublished, errorMessage: isPublishedError} = useField('is_published');
+
     const simpleSchema = yup.object({
-      email: yup.string().required().email(),
       body: yup.string().required().max(256),
+      title: yup.string().required().max(256),
+      img: yup.string().required().max(256),
       postTitle: yup.string().required().min(3, 'Не больше 3 символов.'),
+      timeRead: yup.number().required(),
+      isPublished: yup.number().required(),
     });
 
     function onSubmit() {
@@ -42,14 +56,16 @@ export default {
     }
 
     function onLoadPost(id) {
-      // let id = route.params.post
       if (!id) return
-      console.log(id)
-      console.log('route.params.post', route.params.post)
 
       axios.get(`${process.env.VUE_APP_API_URL}/api/blog/post/${id}`).then((res) => {
-            if (res.data) post.value = res.data
-            console.log('res.data', res.data)
+            if (res.data) {
+              body.value = res.data.body
+              img.value = res.data.img
+              title.value = res.data.title
+              timeRead.value = res.data.time_read
+              isPublished.value = res.data.is_published
+            }
           }
       ).catch((error) => {
         error?.response?.data && errors.value.push(error.response.data.error)
@@ -60,21 +76,21 @@ export default {
       validationSchema: simpleSchema,
     });
 
-    const {value: email, errorMessage: emailError} = useField('email');
-    const {value: body, errorMessage: bodyError} = useField('body');
-    const {value: postTitle, errorMessage: postTitleError} = useField('postTitle');
 
 
     onMounted(() => onLoadPost(route.params.post))
 
     return {
-      postTitle,
-      post,
+      title,
       body,
-      email,
-      emailError,
-      postTitleError,
+      img,
+      timeRead,
+      isPublished,
+      titleError,
       bodyError,
+      timeReadError,
+      isPublishedError,
+      imgError,
       onSubmit,
     }
   }
