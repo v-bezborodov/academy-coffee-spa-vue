@@ -20,7 +20,7 @@ export default {
   name: "InputTextarea",
   components: {ErrorDirectorPartial},
   props: {
-    value: String,
+    value: [Number, String],
     name: String,
     error: String,
     label: String

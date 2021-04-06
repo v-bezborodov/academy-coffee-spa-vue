@@ -2,7 +2,6 @@
   <div>
     <label>
       {{ label }}
-      {{valueBag}}
       <input type="text" v-model="valueBag" :name="name"/>
     </label>
     <ErrorDirectorPartial v-model:errors="errorsBag"/>
@@ -17,7 +16,7 @@ export default {
   name: "InputText",
   components: {ErrorDirectorPartial},
   props: {
-    value: String,
+    value: [Number, String],
     name: String,
     error: String,
     label: String

@@ -17,7 +17,7 @@ export default {
   name: "InputName",
   components: {ErrorDirectorPartial},
   props: {
-    value: String
+    value: [Number, String]
   },
   setup(props, {emit}) {
     const {input, errors} = useInputValidator(

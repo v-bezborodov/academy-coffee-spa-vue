@@ -1,7 +1,6 @@
 // import shop from '../../api/shop'
 
 // initial state
-// shape: [{ id, quantity }]
 const state = {
     user: null,
 }
@@ -35,7 +34,7 @@ const mutations = {
     },
     pushUserToLocalStorage(state, user) {
         localStorage.setItem('user', JSON.stringify(user));
-        state.user=user;
+        state.user = user;
     },
     pushUser(state, user) {
         state.user = user
